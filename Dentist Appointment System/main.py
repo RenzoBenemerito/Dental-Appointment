@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/home')
 def home():
 	return render_template('index.html')
 
@@ -14,7 +14,7 @@ def add():
 def customers():
     return render_template('customers.html')
 
-@app.route('/signin')
+@app.route('/')
 def signIn():
     return render_template('signin.html')
 

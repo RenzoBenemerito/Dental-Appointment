@@ -1,0 +1,111 @@
+body{
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.sideNav{
+  background-color: #263238;
+  height: 100%;
+  width: 10%;
+  padding-top: 10%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  text-align: center;
+}
+#navElements{
+  list-style-type: none;
+  padding: 0;
+}
+.items{
+  color: #80CBC4;
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+.items:hover{
+  background-color: #EEEEEE;
+  cursor: pointer;
+}
+.contentPane{
+  background-color: #EEEEEE;
+  height: 100%;
+  width: auto;
+  position: relative;
+  left: 10%;
+  top: 0;
+}
+#greeting{
+  font-size: 4em;
+  font-family: impact;
+  color: white;
+  text-indent: 10px;
+  display: block;
+  padding: 10px;
+  background-color: #009688;
+  margin-top: 0;
+}
+#today{
+  background-color: white;
+  padding: 15px;
+  margin-left: 5%;
+  height: 100%;
+}
+.todaySched{
+  font-size: 2.5em;
+  font-family: Baloo;
+}
+table{
+  width: 80%;
+}
+table,th,td{
+  border: 1px solid #009688;
+}
+th,td{
+  padding: 10px;
+}
+.fields{
+  text-transform: uppercase;
+  position: absolute;
+  left: 15%;
+  width: 15%;
+  transition: all 0.5s ease-in-out;
+}
+.fields:focus{
+  width: 20%;
+}
+.add{
+  position: absolute;
+  left: 15%;
+  width: 5%;
+}
+.headInfo{
+  background-color: #ECEFF1;
+  height: 5%;
+  width: 100%;
+  padding: 10px;
+}
+#infoTop{
+  font-size: 1.5em;
+  font-family: impact;
+}
+#searchPatients{
+  width: 15%;
+  transition: all 0.4s ease-in-out
+}
+#searchPatients:focus{
+  width: 25%;
+}
+.cont{
+  margin-top: 10%;
+  max-width: 30%;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+}
+#logo{
+  height: 20%;
+  width: auto;
+}
+#signinBody{
+  background-color: #EEEEEE;
+}

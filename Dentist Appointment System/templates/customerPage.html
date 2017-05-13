@@ -1,0 +1,50 @@
+<html>
+<head>
+  <script src="https://use.fontawesome.com/ae84af77c9.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+</head>
+
+<body>
+  <div class="sideNav">
+    <ul id="navElements">
+      <a href="{{url_for('home')}}"><li class="items"><i class="fa fa-home" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('add')}}"><li class="items"><i class="fa fa-plus-square-o" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('customers')}}"><li class="items"><i class="fa fa-users" aria-hidden="true"></i></li></a>
+      <br>
+      <br>
+      <a href="{{url_for('signIn')}}"><li class="items"><i class="fa fa-sign-out" aria-hidden="true"></i></li></a>
+    </ul>
+  </div>
+  <div class="contentPane">
+    <h1 id="greeting">Good Day Dentist!</h1>
+    <br>
+    <div id="today">
+      <h2 class="todaySched">Benemerito, Renzo Leru L.</h2>
+      <h3>Age</h3>
+      <h3>Contact Number</h3>
+      <h2 class="todaySched">Add an Appointment</h2>
+      <form action="">
+        <span>Time</span>
+        <input type="text" class="fields"><br><br>
+        <span>Service to Render</span>
+        <input type="text" class="fields"><br><br>
+        <span>Number of Teeth</span>
+        <input type="text" class="fields"><br><br>
+        <button class="btn btn-primary">Sumbit</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

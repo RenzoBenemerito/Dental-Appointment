@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 body{
   max-width: 100%;
   overflow: hidden;
@@ -110,4 +111,16 @@ th,td{
 }
 #signinBody{
   background-color: #EEEEEE;
+}
+.searchItemsPane{
+  background-color: #F5F5F5;
+  padding: 15px;
+  cursor: pointer;
+}
+.searchItemsPane:hover{
+  border-left: solid orange;
+}
+.headerNames{
+  font-family: Roboto;
+  margin: 0;
 }

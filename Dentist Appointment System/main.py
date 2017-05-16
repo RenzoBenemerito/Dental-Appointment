@@ -1,6 +1,6 @@
 import flask
 import pymysql
-from flask import Flask, render_template, request, redirect, session, url_for, json
+from flask import Flask, render_template, request, redirect, session, url_for, json, jsonify
 from flaskext.mysql import MySQL
 
 mysql = MySQL()
@@ -62,22 +62,26 @@ def logIn():
     else:
         return json.dumps({'html': '<span>Incorrect Email or Password.</span>'})
 
-@app.route('/<name>')
+@app.route('/<name>' , methods = ['GET','POST'])
 def customerPage(name):
-    return render_template('customerPage.html')
+    fullName = request.args.get('name')
+    print(name)
+    #render_template('customerPage.html', fullName = fullName, Age = 19, ContactNumber = 90)
+    return 
 
-@app.route('/_search' , methods=['POST'])
+@app.route('/_search' , methods = ['GET' , 'POST'])
 def search():
     conn = mysql.connect()
     cursor = conn.cursor()
-    searchItem = request.form['searchMe']
+    searchItem = request.form.get('search')
     cursor.callproc('searchPatient' , (searchItem,))
     data = cursor.fetchall()
     names = []
     address = []
     for name in data:
         names.append(name[0])
-    return 
+        address.append(name[1])
+    return jsonify({'names' : names, 'addresses' : address})
 
 @app.route('/logout')
 def logout():

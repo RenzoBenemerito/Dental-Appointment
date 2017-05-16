@@ -31,18 +31,15 @@
     <br>
     <div id="today">
       <h2 class="todaySched">Patient List</h2>
-      <form action="/search" method="POST">
+      <form method="POST" id='searchForm'>
         <h3>Search: </h3>
         <input type="text" id="searchPatients" name='searchMe'></input>
         <button type="submit" name="button">Search</button>
       </form>
-      {% for name in names %}
-      <div class="searchPane">
-        {{name}}
-      {% endfor %}
+      <div id="searchPane"></div>
       </div>
     </div>
   </div>
 </body>
-
+<script src="{{url_for('static',filename='scripts/scriptForSearch.js')}}"></script>
 </html>

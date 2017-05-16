@@ -9,4 +9,11 @@ $('document').ready(function(){
   ];
   month = monthNames[month];
   dateView.innerHTML = "Date today: "+ month + " " + day + ", " +year;
+  var html = ""
+  $('#searchButton').clicked(function(){
+    var namesArray = {{names}}
+    for (var i = 0; i < namesArray.length; i++) {
+      html += "<div class='searchPane'>"+namesArray[i]+"</div>"
+      $('.searchPane').html(html);
+  });
 });

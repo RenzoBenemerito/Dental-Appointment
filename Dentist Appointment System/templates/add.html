@@ -23,7 +23,7 @@
       <a href="{{url_for('customers')}}"><li class="items"><i class="fa fa-users" aria-hidden="true"></i></li></a>
       <br>
       <br>
-      <a href="{{url_for('signIn')}}"><li class="items"><i class="fa fa-sign-out" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('logout')}}"><li class="items"><i class="fa fa-sign-out" aria-hidden="true"></i></li></a>
     </ul>
   </div>
   <div class="contentPane">
@@ -31,29 +31,35 @@
     <br>
     <div id="today">
       <h2 class="todaySched">Add a Record</h2>
-      <form action="/process" method="POST" action='/addCustomer'>
-        <span>Patient Name</span>
-        <input type="text" class="fields" name="Name">
+      <form action="/addProcess" method="post">
+        <span>Patient Name</span><br><br>
+        <span>First Name</span>
+        <input type="text" class="fields" name="FName">
+        <br>
+        <br>
+        <span>Middle Initial</span>
+        <input type="text" class="fields" name="Minit">
+        <br>
+        <br>
+        <span>Last Name</span>
+        <input type="text" class="fields" name="LName">
         <br>
         <br>
         <span>Age</span>
         <input type="text" class="fields" name="Age">
         <br>
         <br>
-        <span>Birthdate</span>
-        <input type="text" class="fields" name="Bday">
-        <br>
-        <br>
-        <span>Contact Number</span>
+        <span>Contact Number(+63)</span>
         <input type="text" class="fields" name="ContactNumber">
         <br>
         <br>
-        <span>Date Added</span>
-        <input type="text" class="fields" name="Date Added">
+        <span>Address</span>
+        <input type="text" class="fields" name="Address">
         <br>
         <br>
+        <button type="submit" class="btn add">Add</button>
       </form>
-      <button class="btn add">Add</button>
+
     </div>
   </div>
 </body>

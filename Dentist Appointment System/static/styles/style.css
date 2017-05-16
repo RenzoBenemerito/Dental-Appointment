@@ -66,7 +66,7 @@ th,td{
 .fields{
   text-transform: uppercase;
   position: absolute;
-  left: 15%;
+  left: 17%;
   width: 15%;
   transition: all 0.5s ease-in-out;
 }
@@ -75,16 +75,18 @@ th,td{
 }
 .add{
   position: absolute;
-  left: 15%;
+  left: 17%;
   width: 5%;
 }
 .headInfo{
   background-color: #ECEFF1;
-  height: 5%;
+  height: 7%;
   width: 100%;
   padding: 10px;
 }
 #infoTop{
+  line-height: 100%;
+  vertical-align: middle;
   font-size: 1.5em;
   font-family: impact;
 }

@@ -18,14 +18,16 @@ $('#searchForm').on('submit' , function(event){
         $('#searchPane').html(html);
         $('.headerNames').click(function(){
           var name = $(this).text();
+          $('#today').empty();
           $.ajax({
             data : {
                 name : name
             },
-            url : '/renzo',
+            url : '/'+name,
             type: 'POST',
             success: function(data) {
-              window.location.href = '/renzo'
+              console.log(data);
+              $('#today').html(data);
             }
           });
         });

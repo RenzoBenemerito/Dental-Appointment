@@ -8,8 +8,8 @@ mysql = MySQL()
 app = Flask(__name__)
 app.secret_key = 'abc'
 
-app.config['MYSQL_DATABASE_USER'] = 'Cyrille115'
-app.config['MYSQL_DATABASE_PASSWORD'] = '12345'
+app.config['MYSQL_DATABASE_USER'] = 'Renzo'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Renzo123'
 app.config['MYSQL_DATABASE_DB'] = 'mydentap'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -36,7 +36,7 @@ def addProcess():
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.callproc('insertPersonalInfo',(Fname,Minit,Lname,Age,Cn,Address))
-        return redirect('/'+Fname)
+        return redirect('/add')
     else:
         return json.dumps({'html': '<span>Enter the required fields</span>'})
 
@@ -64,10 +64,17 @@ def logIn():
 
 @app.route('/<name>' , methods = ['GET','POST'])
 def customerPage(name):
-    fullName = request.args.get('name')
-    print(name)
-    #render_template('customerPage.html', fullName = fullName, Age = 19, ContactNumber = 90)
-    return 
+    fullName = str(name).upper()
+    age = 90
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc('searchPatient', (name,))
+    data = cursor.fetchone();
+    address = str(data[1]).upper()
+    age = data[2]
+    contNum = int(data[3])
+    print(data)
+    return render_template('customerPage.html', Name = fullName, Age = age, ContactNumber = contNum, address = address)
 
 @app.route('/_search' , methods = ['GET' , 'POST'])
 def search():

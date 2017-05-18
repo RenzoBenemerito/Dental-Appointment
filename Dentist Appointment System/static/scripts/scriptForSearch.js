@@ -23,10 +23,9 @@ $('#searchForm').on('submit' , function(event){
             data : {
                 name : name
             },
-            url : '/'+name,
+            url : '/customers/'+name,
             type: 'POST',
             success: function(data) {
-              console.log(data);
               $('#today').html(data);
             }
           });

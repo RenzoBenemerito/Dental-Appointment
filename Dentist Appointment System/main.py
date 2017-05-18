@@ -62,7 +62,22 @@ def logIn():
     else:
         return json.dumps({'html': '<span>Incorrect Email or Password.</span>'})
 
-@app.route('/<name>' , methods = ['GET','POST'])
+@app.route('/addAppt', methods = ['POST'])
+def addAppt():
+    date = request.form['Date']
+    startTime = request.form['startTime']
+    endTime = request.form['endTime']
+    service = request.form['service']
+    name = request.form['Fullname']
+    if date and startTime and endTime and service and name:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('setAppointment',(startTime,endTime,name,service,date))
+        conn.commit()
+    return render_template('index.html')
+
+
+@app.route('/customers/<name>' , methods = ['GET','POST'])
 def customerPage(name):
     fullName = str(name).upper()
     age = 90
@@ -73,7 +88,6 @@ def customerPage(name):
     address = str(data[1]).upper()
     age = data[2]
     contNum = int(data[3])
-    print(data)
     return render_template('customerPage.html', Name = fullName, Age = age, ContactNumber = contNum, address = address)
 
 @app.route('/_search' , methods = ['GET' , 'POST'])

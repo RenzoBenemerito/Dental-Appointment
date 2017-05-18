@@ -1,17 +1,17 @@
 
-
-      <h2 class="todaySched">{{Name}}</h2>
+<script src="{{url_for('static',filename='scripts/appointment.js')}}"></script>
+      <h2 id="nameOf" class="todaySched">{{Name}}</h2>
       <h3>Age: {{Age}}</h3>
       <h3>Contact Number: {{ContactNumber}}</h3>
       <h3>Address: {{address}}</h3>
       <h2 class="todaySched">Add an Appointment</h2>
-      <form action="">
+      <form  action="/addAppt" id="addAppt" method="POST">
         <span class="fieldName">Date</span>
         <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
         <span class="fieldName">Time</span><br><br>
         <span>Start</span>
         <div style="display:inline-block; width:15%;" class="fields">
-          <select class="form-control" name="service">
+          <select class="form-control" name="startTime">
             <option value="Choose an option">Choose an Option</option>
             <option value="8:00-8:30">8:00-8:30</option>
             <option value="8:30-9:00">8:30-9:00</option>
@@ -33,7 +33,7 @@
         <br><br>
         <span>End</span>
         <div style="display:inline-block; width:15%;" class="fields">
-          <select class="form-control" name="service">
+          <select class="form-control" name="endTime">
             <option value="Choose an option">Choose an Option</option>
             <option value="8:00-8:30">8:00-8:30</option>
             <option value="8:30-9:00">8:30-9:00</option>
@@ -68,6 +68,6 @@
         <br>
         <br>
         <br>
-        <button class="btn btn-primary">Sumbit</button>
+        <button type="submit" class="btn btn-primary" id="ok">Sumbit</button>
       </form>
     </div>

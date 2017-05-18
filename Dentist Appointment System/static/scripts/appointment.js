@@ -1,7 +1,11 @@
-$('document').ready(function(){
-  var name = $('.todaySched').text();
-  var input = $("<input>")
-               .attr("type", "hidden")
-               .attr("name", "name").val(name);
-$('#appointment').append($(input));
+$(document).ready(function(){
+
+  $("#addAppt").submit( function(eventObj) {
+      var name = $('#nameOf').text();
+      alert(name);
+      $('<input />').attr('type', 'hidden')
+          .attr('name', "Fullname")
+          .attr('value', name)
+          .appendTo('#addAppt');
+  });
 });

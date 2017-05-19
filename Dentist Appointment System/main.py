@@ -1,7 +1,8 @@
 import flask
-import pymysql
+import datetime
 from flask import Flask, render_template, request, redirect, session, url_for, json, jsonify
 from flaskext.mysql import MySQL
+
 
 mysql = MySQL()
 
@@ -17,7 +18,14 @@ mysql.init_app(app)
 
 @app.route('/home')
 def home():
-	return render_template('index.html')
+    time = []
+    name = []
+    service = []
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc("schedForToday")
+    data = cursor.fetchall()
+    return render_template('index.html', data = data)
 
 @app.route('/add')
 def add():
@@ -85,10 +93,14 @@ def customerPage(name):
     cursor = conn.cursor()
     cursor.callproc('searchPatient', (name,))
     data = cursor.fetchone();
+    id = data[4]
     address = str(data[1]).upper()
     age = data[2]
     contNum = int(data[3])
-    return render_template('customerPage.html', Name = fullName, Age = age, ContactNumber = contNum, address = address)
+    cursor.callproc('appointmentsByPatID', (name,))
+    data = cursor.fetchall()
+    print(data)
+    return render_template('customerPage.html', Name = fullName, Age = age, ContactNumber = contNum, address = address, ID = id, data = data)
 
 @app.route('/_search' , methods = ['GET' , 'POST'])
 def search():
@@ -103,6 +115,31 @@ def search():
         names.append(name[0])
         address.append(name[1])
     return jsonify({'names' : names, 'addresses' : address})
+
+@app.route('/updateAppt', methods = ['POST'])
+def updateAppt():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    id = request.form['id']
+    date = request.form['Date']
+    startTime = request.form['startTime']
+    endTime = request.form['endTime']
+    service = request.form['service']
+    name = request.form['Fullname']
+    if date and startTime and endTime and service and name:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('updateAppointment', (id, startTime, endTime, name, service, date))
+        conn.commit()
+    return redirect('/home')
+
+@app.route('/cancelAppt', methods = ['POST'])
+def cancelAppt():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    id = request.form['id']
+    cursor.callproc('cancelAppointment',(id,))
+    return redirect('/home')
 
 @app.route('/logout')
 def logout():

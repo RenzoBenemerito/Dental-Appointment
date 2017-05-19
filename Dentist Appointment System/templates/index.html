@@ -36,41 +36,94 @@
       <h2 class="todaySched">Your Schedule for today</h2>
       <table>
         <tr>
+          <th class="headings">Appointment ID</th>
           <th class="headings">Time</th>
           <th class="headings">Patient Name</th>
           <th class="headings">Service to Render</th>
         </tr>
+        {% for row in data %}
         <tr>
-          <td>8:00-9:00</td>
-          <td>Jennifer Lawrence</td>
-          <td>Cleaning</td>
+          {% for element in row %}
+          <td>{{element}}</td>
+          {% endfor %}
         </tr>
-        <tr>
-          <td>9:00-10:00</td>
-          <td>Chris Pratt</td>
-          <td>Cleaning</td>
-        </tr>
-        <tr>
-          <td>11:00-1:00</td>
-          <td>Dave Bautista</td>
-          <td>Cleaning</td>
-        </tr>
-        <tr>
-          <td>2:00-3:00</td>
-          <td>Kurt Russel</td>
-          <td>Cleaning</td>
-        </tr>
-        <tr>
-          <td>3:00-5:00</td>
-          <td>Zoey Zaldana</td>
-          <td>Cleaning</td>
-        </tr>
+        {% endfor %}
       </table>
       <br>
       <br>
+      <div class="updateContainer">
+        <form  action="/updateAppt" id="addAppt" method="POST">
+          <span class="fieldName">Date</span>
+          <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
+          <span class="fieldName">Time</span><br><br>
+          <span>Start</span>
+          <div style="display:inline-block; width:15%;" class="fields">
+            <select class="form-control" name="startTime">
+              <option value="Choose an option">Choose an Option</option>
+              <option value="8:00-8:30">8:00-8:30</option>
+              <option value="8:30-9:00">8:30-9:00</option>
+              <option value="9:00-9:30">9:00-9:30</option>
+              <option value="9:30-10:00">9:30-10:00</option>
+              <option value="10:00-10:30">10:00-10:30</option>
+              <option value="10:30-11:00">10:30-11:00</option>
+              <option value="11:00-11:30">11:00-11:30</option>
+              <option value="11:30-12:00">11:30-12:00</option>
+              <option value="1:30-2:00">1:30-2:00</option>
+              <option value="2:00-2:30">2:00-2:30</option>
+              <option value="2:30-3:00">2:30-3:00</option>
+              <option value="3:00-3:30">3:00-3:30</option>
+              <option value="3:30-4:00">3:30-4:00</option>
+              <option value="4:00-4:30">4:00-4:30</option>
+              <option value="4:30-5:00">4:30-5:00</option>
+            </select>
+          </div>
+          <br><br>
+          <span>End</span>
+          <div style="display:inline-block; width:15%;" class="fields">
+            <select class="form-control" name="endTime">
+              <option value="Choose an option">Choose an Option</option>
+              <option value="8:00-8:30">8:00-8:30</option>
+              <option value="8:30-9:00">8:30-9:00</option>
+              <option value="9:00-9:30">9:00-9:30</option>
+              <option value="9:30-10:00">9:30-10:00</option>
+              <option value="10:00-10:30">10:00-10:30</option>
+              <option value="10:30-11:00">10:30-11:00</option>
+              <option value="11:00-11:30">11:00-11:30</option>
+              <option value="11:30-12:00">11:30-12:00</option>
+              <option value="1:30-2:00">1:30-2:00</option>
+              <option value="2:00-2:30">2:00-2:30</option>
+              <option value="2:30-3:00">2:30-3:00</option>
+              <option value="3:00-3:30">3:00-3:30</option>
+              <option value="3:30-4:00">3:30-4:00</option>
+              <option value="4:00-4:30">4:00-4:30</option>
+              <option value="4:30-5:00">4:30-5:00</option>
+            </select>
+          </div>
+          <br><br>
+          <span class="fieldName">Service to Render</span>
+          <div style="display:inline-block; width:15%;" class="fields">
+            <select class="form-control" name="service">
+              <option value="Choose an option">Choose an Option</option>
+              <option value="Cleaning">Cleaning</option>
+              <option value="Tooth Extraction">Tooth Extraction</option>
+              <option value="Fillings">Fillings(Pasta)</option>
+              <option value="Dentures">Dentures</option>
+              <option value="X-ray">X-ray</option>
+              <option value="Orthodontics">Orthodontics</option>
+            </select>
+          </div>
+          <br>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary" id="ok">Sumbit</button>
+        </form>
+      </div>
+      <button type="submit" style="margin-left:16%" class='btn btn-info' id='resched'>Reschedule Appointment</button>
+      <button type="submit" class='btn btn-danger' id='delete'>Cancel Appointment</button>
     </div>
   </div>
 </body>
 <script src="{{url_for('static',filename='scripts/script.js')}}"></script>
+<script src="{{url_for('static',filename='scripts/rowSelector.js')}}"></script>
 
 </html>

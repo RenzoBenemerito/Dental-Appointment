@@ -9,4 +9,9 @@ $('document').ready(function(){
   ];
   month = monthNames[month];
   dateView.innerHTML = "Date today: "+ month + " " + day + ", " +year;
-  });
+      function upperCaseF(a){
+        setTimeout(function(){
+            a.value = a.value.toUpperCase();
+        }, 1);
+    }
+});

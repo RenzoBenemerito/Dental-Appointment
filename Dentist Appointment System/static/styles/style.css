@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 body{
   max-width: 100%;
-  overflow: hidden;
 }
 
 .sideNav{
@@ -57,12 +56,29 @@ body{
 }
 table{
   width: 80%;
+  cursor: pointer;
+}
+#table1{
+  width: 50%;
+  cursor: pointer;
 }
 table,th,td{
   border: 1px solid #009688;
 }
+th{
+  background-color: #009688;
+}
+tr:hover{
+  background-color: #80DEEA;
+}
 th,td{
   padding: 10px;
+}
+.selected{
+  background-color: #80DEEA;
+}
+.updateContainer{
+  display: none;
 }
 .fields{
   text-transform: uppercase;
@@ -109,6 +125,11 @@ th,td{
 #logo{
   height: 20%;
   width: auto;
+}
+.tableContainer{
+  position: absolute;
+  left: 40%;
+  top: 14%;
 }
 #signinBody{
   background-color: #EEEEEE;

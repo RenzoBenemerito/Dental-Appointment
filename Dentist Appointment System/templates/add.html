@@ -34,15 +34,15 @@
       <form action="/addProcess" method="post">
         <span>Patient Name</span><br><br>
         <span>First Name</span>
-        <input type="text" class="fields" name="FName">
+        <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)">
         <br>
         <br>
         <span>Middle Initial</span>
-        <input type="text" class="fields" name="Minit">
+        <input type="text" class="fields" name="Minit" onkeydown="upperCaseF(this)">
         <br>
         <br>
         <span>Last Name</span>
-        <input type="text" class="fields" name="LName">
+        <input type="text" class="fields" name="LName" onkeydown="upperCaseF(this)">
         <br>
         <br>
         <span>Age</span>
@@ -54,7 +54,7 @@
         <br>
         <br>
         <span>Address</span>
-        <input type="text" class="fields" name="Address">
+        <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)">
         <br>
         <br>
         <button type="submit" class="btn add">Add</button>
@@ -63,5 +63,11 @@
     </div>
   </div>
 </body>
-
+<script type="text/javascript">
+function upperCaseF(a){
+  setTimeout(function(){
+      a.value = a.value.toUpperCase();
+  }, 1);
+}
+</script>
 </html>

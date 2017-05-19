@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `mydentap`.`appointments` (
   `ToTime` TIME NULL DEFAULT NULL,
   `DateApp` DATE NULL DEFAULT NULL,
   `PatientName` VARCHAR(45) NULL DEFAULT NULL,
-  `PatientID` INT(11) NULL DEFAULT NULL,
   `Service` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`AppointID`))
 ENGINE = MyISAM
@@ -86,7 +85,7 @@ USE `mydentap` ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `appointByDate`(
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `appointByDate`(
 	in DateGiven date
 )
 BEGIN
@@ -101,11 +100,11 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `appointmentsByPatID`(
-	IN IDpat int
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `appointmentsByPatID`(
+	IN NamePat varchar(50)
 )
 BEGIN
-SELECT appointID, CONCAT(TIME_FORMAT(Fromtime, '%h:%i %p'), " - TO - ", TIME_FORMAT(totime, '%h:%i %p')) AS SCHEDULE, PatientName, Service, DateApp from appointments where PatientID = IDpat ORDER BY DateApp ASC;
+SELECT appointID, CONCAT(TIME_FORMAT(Fromtime, '%h:%i %p'), " - TO - ", TIME_FORMAT(totime, '%h:%i %p')) AS SCHEDULE, PatientName, Service, DateApp from appointments where PatientName = NamePat ORDER BY DateApp ASC;
 END$$
 
 DELIMITER ;
@@ -116,7 +115,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `cancelAppointment`(
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `cancelAppointment`(
 
 in apID int
 
@@ -133,7 +132,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `insertPersonalInfo`(
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `insertPersonalInfo`(
 		IN firstn VARCHAR(20),
         IN middlen VARCHAR(20),
         IN lastn VARCHAR(20),
@@ -156,9 +155,9 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `schedForToday`()
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `schedForToday`()
 BEGIN
-select appointID, CONCAT(TIME_FORMAT(Fromtime, '%h:%i %p'), " - TO - ", TIME_FORMAT(totime, '%h:%i %p')) AS SCHEDULE, PatientName, PatientID, Service from appointments WHERE DateApp like CURDATE() ORDER BY FromTime asc;
+select appointID, CONCAT(TIME_FORMAT(Fromtime, '%h:%i %p'), " - TO - ", TIME_FORMAT(totime, '%h:%i %p')) AS SCHEDULE, PatientName, Service from appointments WHERE DateApp like CURDATE() ORDER BY FromTime asc;
 END$$
 
 DELIMITER ;
@@ -169,11 +168,11 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `searchPatient`(
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `searchPatient`(
 	IN nameInput varchar(30)
 )
 BEGIN
-select patientsname.WholeName, patientlist.Address, patientlist.Age, patientlist.Contact from patientsname inner join patientlist on patientsname.PatID = patientlist.PatientID where patientsname.WholeName LIKE CONCAT("%",nameInput,"%"); 
+select patientsname.WholeName, patientlist.Address, patientlist.Age, patientlist.Contact, patientList.PatientID from patientsname inner join patientlist on patientsname.PatID = patientlist.PatientID where patientsname.WholeName LIKE CONCAT("%",nameInput,"%"); 
 END$$
 
 DELIMITER ;
@@ -184,12 +183,11 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `setAppointment`(
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `setAppointment`(
 
     IN fromT time,
     IN toT time,
     IN NamePatient varchar(60),
-    IN patID int(60),
     IN serv varchar(30),
     IN servDate date
     
@@ -203,8 +201,8 @@ IF ( select exists (select 1 from appointments where FromTime = fromT or ToTime 
 
 ELSE
 
-			INSERT INTO appointments (FromTime, ToTime, PatientName, PatientID, Service, DateApp)
-			VALUES (fromT, toT, NamePatient, patID, serv, servDate);
+			INSERT INTO appointments (FromTime, ToTime, PatientName, Service, DateApp)
+			VALUES (fromT, toT, NamePatient, serv, servDate);
 END IF;
 
 END$$
@@ -217,7 +215,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `mydentap`$$
-CREATE DEFINER=`Cyrille115`@`localhost` PROCEDURE `updatePersonalInfo`(
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `updatePersonalInfo`(
 		IN firstn VARCHAR(20),
         IN middlen VARCHAR(20),
         IN lastn VARCHAR(20),
@@ -234,6 +232,7 @@ UPDATE patientsname SET WholeName = CONCAT(firstn, " ", middlen, " ", lastn), Ad
 END$$
 
 DELIMITER ;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

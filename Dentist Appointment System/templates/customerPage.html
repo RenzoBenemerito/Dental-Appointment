@@ -1,6 +1,7 @@
 
 <script src="{{url_for('static',filename='scripts/appointment.js')}}"></script>
       <h2 id="nameOf" class="todaySched">{{Name}}</h2>
+      <h3>ID: {{ID}}</h3>
       <h3>Age: {{Age}}</h3>
       <h3>Contact Number: {{ContactNumber}}</h3>
       <h3>Address: {{address}}</h3>
@@ -70,4 +71,128 @@
         <br>
         <button type="submit" class="btn btn-primary" id="ok">Sumbit</button>
       </form>
+      <h2 class="todaySched">Update Info</h2>
+      <form action="/updateProcess" method="post">
+        <span>Patient Name</span><br><br>
+        <span>First Name</span>
+        <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)">
+        <br>
+        <br>
+        <span>Middle Initial</span>
+        <input type="text" class="fields" name="Minit" onkeydown="upperCaseF(this)">
+        <br>
+        <br>
+        <span>Last Name</span>
+        <input type="text" class="fields" name="LName" onkeydown="upperCaseF(this)">
+        <br>
+        <br>
+        <span>Age</span>
+        <input type="text" class="fields" name="Age">
+        <br>
+        <br>
+        <span>Contact Number(+63)</span>
+        <input type="text" class="fields" name="ContactNumber">
+        <br>
+        <br>
+        <span>Address</span>
+        <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)">
+        <br>
+        <br>
+        <button type="submit" class="btn add">Add</button>
+      </form>
+      <br>
+      <br>
+      <button class="btn btn-danger">Delete Patient</button>
+      <div class="tableContainer">
+        <table id="table1">
+          <tr>
+            <th class="headings">Appointment ID</th>
+            <th class="headings">Time</th>
+            <th class="headings">Patient Name</th>
+            <th class="headings">Service to Render</th>
+            <th class="headings">Date</th>
+          </tr>
+          {% for row in data %}
+          <tr>
+            {% for element in row %}
+            <td>{{element}}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        <button type="submit" class='btn btn-danger' id='delete'>Cancel Appointment</button>
+        <form  action="/updateAppt" id="addAppt" method="POST">
+          <span class="fieldName">Date</span>
+          <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
+          <span class="fieldName">Time</span><br><br>
+          <span>Start</span>
+          <div style="display:inline-block; width:15%;" class="fields">
+            <select class="form-control" name="startTime">
+              <option value="Choose an option">Choose an Option</option>
+              <option value="8:00-8:30">8:00-8:30</option>
+              <option value="8:30-9:00">8:30-9:00</option>
+              <option value="9:00-9:30">9:00-9:30</option>
+              <option value="9:30-10:00">9:30-10:00</option>
+              <option value="10:00-10:30">10:00-10:30</option>
+              <option value="10:30-11:00">10:30-11:00</option>
+              <option value="11:00-11:30">11:00-11:30</option>
+              <option value="11:30-12:00">11:30-12:00</option>
+              <option value="1:30-2:00">1:30-2:00</option>
+              <option value="2:00-2:30">2:00-2:30</option>
+              <option value="2:30-3:00">2:30-3:00</option>
+              <option value="3:00-3:30">3:00-3:30</option>
+              <option value="3:30-4:00">3:30-4:00</option>
+              <option value="4:00-4:30">4:00-4:30</option>
+              <option value="4:30-5:00">4:30-5:00</option>
+            </select>
+          </div>
+          <br><br>
+          <span>End</span>
+          <div style="display:inline-block; width:15%;" class="fields">
+            <select class="form-control" name="endTime">
+              <option value="Choose an option">Choose an Option</option>
+              <option value="8:00-8:30">8:00-8:30</option>
+              <option value="8:30-9:00">8:30-9:00</option>
+              <option value="9:00-9:30">9:00-9:30</option>
+              <option value="9:30-10:00">9:30-10:00</option>
+              <option value="10:00-10:30">10:00-10:30</option>
+              <option value="10:30-11:00">10:30-11:00</option>
+              <option value="11:00-11:30">11:00-11:30</option>
+              <option value="11:30-12:00">11:30-12:00</option>
+              <option value="1:30-2:00">1:30-2:00</option>
+              <option value="2:00-2:30">2:00-2:30</option>
+              <option value="2:30-3:00">2:30-3:00</option>
+              <option value="3:00-3:30">3:00-3:30</option>
+              <option value="3:30-4:00">3:30-4:00</option>
+              <option value="4:00-4:30">4:00-4:30</option>
+              <option value="4:30-5:00">4:30-5:00</option>
+            </select>
+          </div>
+          <br><br>
+          <span class="fieldName">Service to Render</span>
+          <div style="display:inline-block; width:15%;" class="fields">
+            <select class="form-control" name="service">
+              <option value="Choose an option">Choose an Option</option>
+              <option value="Cleaning">Cleaning</option>
+              <option value="Tooth Extraction">Tooth Extraction</option>
+              <option value="Fillings">Fillings(Pasta)</option>
+              <option value="Dentures">Dentures</option>
+              <option value="X-ray">X-ray</option>
+              <option value="Orthodontics">Orthodontics</option>
+            </select>
+          </div>
+          <br>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary" id="ok">Reschedule Appointment</button>
+        </form>
+      </div>
     </div>
+  <script src="{{url_for('static',filename='scripts/rowSelector.js')}}"></script>
+  <script type="text/javascript">
+  function upperCaseF(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+  }
+  </script>

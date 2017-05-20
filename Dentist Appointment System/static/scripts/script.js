@@ -1,4 +1,4 @@
-$('document').ready(function(){
+$(document).ready(function(){
   var date = new Date();
   var year = date.getFullYear();
   var month = date.getMonth();

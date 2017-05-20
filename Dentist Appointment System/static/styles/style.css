@@ -67,6 +67,8 @@ table,th,td{
 }
 th{
   background-color: #009688;
+  color: white;
+  text-align: center;
 }
 tr:hover{
   background-color: #80DEEA;
@@ -127,9 +129,16 @@ th,td{
   width: auto;
 }
 .tableContainer{
+  width: 75%;
   position: absolute;
   left: 40%;
   top: 14%;
+}
+.tableContainer1{
+  width: 75%;
+  position: absolute;
+  left: 22%;
+  top: 17%;
 }
 #signinBody{
   background-color: #EEEEEE;

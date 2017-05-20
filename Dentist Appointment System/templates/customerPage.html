@@ -1,7 +1,7 @@
 
 <script src="{{url_for('static',filename='scripts/appointment.js')}}"></script>
       <h2 id="nameOf" class="todaySched">{{Name}}</h2>
-      <h3>ID: {{ID}}</h3>
+      <h3 id="id">{{ID}}</h3>
       <h3>Age: {{Age}}</h3>
       <h3>Contact Number: {{ContactNumber}}</h3>
       <h3>Address: {{address}}</h3>
@@ -72,7 +72,7 @@
         <button type="submit" class="btn btn-primary" id="ok">Sumbit</button>
       </form>
       <h2 class="todaySched">Update Info</h2>
-      <form action="/updateProcess" method="post">
+      <form action="/updateProcess" id="updateProcess" method="POST">
         <span>Patient Name</span><br><br>
         <span>First Name</span>
         <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)">
@@ -98,11 +98,11 @@
         <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)">
         <br>
         <br>
-        <button type="submit" class="btn add">Add</button>
+        <button type="submit" class="btn add">Update</button>
       </form>
       <br>
       <br>
-      <button class="btn btn-danger">Delete Patient</button>
+      <button class="btn btn-danger" id="deletePat" onclick="deletePatient">Delete Patient</button>
       <div class="tableContainer">
         <table id="table1">
           <tr>
@@ -120,8 +120,11 @@
           </tr>
           {% endfor %}
         </table>
+        <br>
         <button type="submit" class='btn btn-danger' id='delete'>Cancel Appointment</button>
-        <form  action="/updateAppt" id="addAppt" method="POST">
+        <br>
+        <br>
+        <form  action="/updateAppt" id="updateAppt" method="POST">
           <span class="fieldName">Date</span>
           <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
           <span class="fieldName">Time</span><br><br>
@@ -188,7 +191,7 @@
         </form>
       </div>
     </div>
-  <script src="{{url_for('static',filename='scripts/rowSelector.js')}}"></script>
+  <script src="{{url_for('static',filename='scripts/rowSelector1.js')}}"></script>
   <script type="text/javascript">
   function upperCaseF(a){
     setTimeout(function(){

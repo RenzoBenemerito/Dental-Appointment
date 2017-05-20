@@ -31,6 +31,10 @@ def home():
 def add():
     return render_template('add.html')
 
+@app.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
+
 @app.route('/addProcess' , methods = ['POST'])
 def addProcess():
     Fname = request.form['FName']
@@ -39,7 +43,6 @@ def addProcess():
     Age = request.form['Age']
     Cn = request.form['ContactNumber']
     Address = request.form['Address']
-    print(Fname,Minit,Lname,Age,Cn,Address)
     if Fname and Minit and Lname and Age and Cn and Address:
         conn = mysql.connect()
         cursor = conn.cursor()
@@ -50,6 +53,34 @@ def addProcess():
 
     cursor.close()
     conn.close()
+
+@app.route('/updateProcess', methods = ['POST'])
+def updateProcess():
+    Fname = request.form['FName']
+    Minit = request.form['Minit']
+    Lname = request.form['LName']
+    Age = request.form['Age']
+    Cn = request.form['ContactNumber']
+    Address = request.form['Address']
+    id = request.form['id']
+    print(id)
+    if Fname and Minit and Lname and Age and Cn and Address:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('updatePersonalInfo',(Fname,Minit,Lname,Age,Cn,Address,id))
+        conn.commit()
+    return ('', 204)
+    cursor.close()
+    conn.close()
+
+@app.route('/deleteProcess', methods = ['POST'])
+def deleteProcess():
+    id = request.form['id']
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc('deletePatient',(id,))
+    conn.commit()
+    return redirect('/home')
 
 
 @app.route('/customers')
@@ -66,7 +97,7 @@ def logIn():
     password = request.form['pass']
     if email == 'renzo@gmail.com' and password == '123':
         session['email'] = email
-        return render_template('index.html')
+        return redirect('/home')
     else:
         return json.dumps({'html': '<span>Incorrect Email or Password.</span>'})
 
@@ -82,24 +113,22 @@ def addAppt():
         cursor = conn.cursor()
         cursor.callproc('setAppointment',(startTime,endTime,name,service,date))
         conn.commit()
-    return render_template('index.html')
+    return redirect('/home')
 
 
 @app.route('/customers/<name>' , methods = ['GET','POST'])
 def customerPage(name):
-    fullName = str(name).upper()
-    age = 90
+    fullName = str(name)
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.callproc('searchPatient', (name,))
     data = cursor.fetchone();
     id = data[4]
-    address = str(data[1]).upper()
+    address = str(data[1])
     age = data[2]
     contNum = int(data[3])
     cursor.callproc('appointmentsByPatID', (name,))
     data = cursor.fetchall()
-    print(data)
     return render_template('customerPage.html', Name = fullName, Age = age, ContactNumber = contNum, address = address, ID = id, data = data)
 
 @app.route('/_search' , methods = ['GET' , 'POST'])
@@ -118,18 +147,15 @@ def search():
 
 @app.route('/updateAppt', methods = ['POST'])
 def updateAppt():
-    conn = mysql.connect()
-    cursor = conn.cursor()
     id = request.form['id']
     date = request.form['Date']
     startTime = request.form['startTime']
     endTime = request.form['endTime']
     service = request.form['service']
-    name = request.form['Fullname']
-    if date and startTime and endTime and service and name:
+    if date and startTime and endTime and service and id:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.callproc('updateAppointment', (id, startTime, endTime, name, service, date))
+        cursor.callproc('updateAppoint', (startTime, endTime, date, service, id))
         conn.commit()
     return redirect('/home')
 
@@ -140,6 +166,17 @@ def cancelAppt():
     id = request.form['id']
     cursor.callproc('cancelAppointment',(id,))
     return redirect('/home')
+
+@app.route('/tableRenderer', methods = ['POST'])
+def tableRenderer():
+    date = request.form['date']
+    print(date)
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc('appointByDate',(date,))
+    data = cursor.fetchall()
+    print(data)
+    return render_template('calendarTemp.html',data = data)
 
 @app.route('/logout')
 def logout():

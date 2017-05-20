@@ -1,0 +1,97 @@
+<html>
+<head>
+  <script src="https://use.fontawesome.com/ae84af77c9.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+
+  <link rel="stylesheet" href="{{url_for('static',filename='styles/calendarview.css')}}">
+  <style>
+    body {
+      font-family: Trebuchet MS;
+    }
+    div.calendar {
+      max-width: 240px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    div.calendar table {
+      width: 100%;
+    }
+    div.dateField {
+      width: 140px;
+      padding: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      color: #555;
+      background-color: white;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    div#popupDateField:hover {
+      background-color: #cde;
+      cursor: pointer;
+    }
+  </style>
+  <script src="{{url_for('static',filename='scripts/prototype.js')}}"></script>
+  <script src="{{url_for('static',filename='scripts/calendarview.js')}}"></script>
+
+
+</head>
+<body>
+  <div class="sideNav">
+    <ul id="navElements">
+      <a href="{{url_for('home')}}"><li class="items"><i class="fa fa-home" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('calendar')}}"><li class="items"><i class="fa fa-calendar" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('add')}}"><li class="items"><i class="fa fa-plus-square-o" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('customers')}}"><li class="items"><i class="fa fa-users" aria-hidden="true"></i></li></a>
+      <br>
+      <br>
+      <a href="{{url_for('logout')}}"><li class="items"><i class="fa fa-sign-out" aria-hidden="true"></i></li></a>
+    </ul>
+  </div>
+  <div class="contentPane">
+    <h1 id="greeting">Good Day Dentist!</h1>
+    <br>
+    <div id="today">
+      <h2 class="todaySched">Calendar</h2>
+      <center>
+      <div id="embeddedExample" style="float:left">
+        <div id="embeddedCalendar" style="margin-left: auto; margin-right: auto">
+        </div>
+        <br />
+        <div id="embeddedDateField" class="dateField">
+          Select Date
+        </div>
+        <br />
+      </div>
+      </center>
+  </div>
+  <div class="tableContainer1">
+
+  </div>
+</body>
+<script src="{{url_for('static',filename='scripts/renderTable.js')}}"></script>
+<script type="text/javascript">
+      window.onload = function() {
+        Calendar.setup({
+          dateField     : 'embeddedDateField',
+          parentElement : 'embeddedCalendar'
+        });
+      };
+    </script>
+</html>

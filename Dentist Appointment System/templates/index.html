@@ -19,6 +19,7 @@
   <div class="sideNav">
     <ul id="navElements">
       <a href="{{url_for('home')}}"><li class="items"><i class="fa fa-home" aria-hidden="true"></i></li></a>
+      <a href="{{url_for('calendar')}}"><li class="items"><i class="fa fa-calendar" aria-hidden="true"></i></li></a>
       <a href="{{url_for('add')}}"><li class="items"><i class="fa fa-plus-square-o" aria-hidden="true"></i></li></a>
       <a href="{{url_for('customers')}}"><li class="items"><i class="fa fa-users" aria-hidden="true"></i></li></a>
       <br>
@@ -52,7 +53,7 @@
       <br>
       <br>
       <div class="updateContainer">
-        <form  action="/updateAppt" id="addAppt" method="POST">
+        <form  action="/updateAppt" id="updateAppt" method="POST">
           <span class="fieldName">Date</span>
           <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
           <span class="fieldName">Time</span><br><br>

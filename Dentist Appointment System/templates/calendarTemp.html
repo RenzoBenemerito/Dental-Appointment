@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th class="headings">Appointment ID</th>
+    <th class="headings">Time</th>
+    <th class="headings">Patient Name</th>
+    <th class="headings">Service to Render</th>
+    <th class="headings">Date</th>
+  </tr>
+  {% for row in data %}
+  <tr>
+    {% for element in row %}
+    <td>{{element}}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>

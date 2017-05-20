@@ -226,13 +226,27 @@ CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `updatePersonalInfo`(
         )
 BEGIN
 
-UPDATE patientlist SET FName=firstn, MName=middlen, LName=lastn, Age=age, Contact=contactn, Address=addr WHERE PatiendID=patieID;
+UPDATE patientlist SET FName=firstn, MName=middlen, LName=lastn, Age=age, Contact=contactn, Address=addr WHERE PatientID=patieID;
 
 UPDATE patientsname SET WholeName = CONCAT(firstn, " ", middlen, " ", lastn), Address = addr WHERE PatID =patieID;
 END$$
 
 DELIMITER ;
 
+DELIMITER $$
+USE `mydentap`$$
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `updateAppoint`(
+		IN newFrom time,
+        IN newTo time,
+        IN newDate date,
+        IN newService varchar(100),
+        IN appointmentID int
+        )
+BEGIN
+UPDATE appointments SET FromTime=newFrom, ToTime=newTo, DateApp=newDate, Service=newService WHERE AppointID=appointmentID;
+END$$
+
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

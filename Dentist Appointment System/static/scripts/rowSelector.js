@@ -2,9 +2,10 @@ $(document).ready(function(){
   $("table tr").click(function(){
      $(this).addClass('selected').siblings().removeClass('selected');
      var value=$(this).find('td:first').html();
+
+
      $('#delete').click(function(event){
        event.preventDefault();
-       console.log('you clicked me');
        $.ajax({
          data: {
           id: value
@@ -16,10 +17,17 @@ $(document).ready(function(){
          }
        });
      });
-  });
+
   $('#resched').click(function(){
     $('#resched').css('display','none');
     $('#delete').css('display','none');
     $('.updateContainer').css('display','block');
+    $("#updateAppt").submit( function(eventObj) {
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "id")
+            .attr('value', value)
+            .appendTo('#updateAppt');
+    });
+    });
   });
 });

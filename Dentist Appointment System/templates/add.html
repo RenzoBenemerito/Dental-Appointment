@@ -18,17 +18,18 @@
 <body>
   <div class="sideNav">
     <ul id="navElements">
+      <img id="logoNav" src="{{url_for('static',filename='styles/logo.png')}}" alt="logo">
       <a href="{{url_for('home')}}"><li class="items"><i class="fa fa-home" aria-hidden="true"></i></li></a>
       <a href="{{url_for('calendar')}}"><li class="items"><i class="fa fa-calendar" aria-hidden="true"></i></li></a>
       <a href="{{url_for('add')}}"><li class="items"><i class="fa fa-plus-square-o" aria-hidden="true"></i></li></a>
-      <a href="{{url_for('customers')}}"><li class="items"><i class="fa fa-users" aria-hidden="true"></i></li></a>    
+      <a href="{{url_for('customers')}}"><li class="items"><i class="fa fa-users" aria-hidden="true"></i></li></a>
       <br>
       <br>
       <a href="{{url_for('logout')}}"><li class="items"><i class="fa fa-sign-out" aria-hidden="true"></i></li></a>
     </ul>
   </div>
   <div class="contentPane">
-    <h1 id="greeting">Good Day Dentist!</h1>
+    <h1 id="greeting">Dental Care Plus</h1>
     <br>
     <div id="today">
       <h2 class="todaySched">Add a Record</h2>

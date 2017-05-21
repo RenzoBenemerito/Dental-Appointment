@@ -44,6 +44,11 @@ body{
   background-color: #009688;
   margin-top: 0;
 }
+#headerLogo{
+  margin-left: 1.8888%;
+  height: 7%;
+  width: auto;
+}
 #today{
   background-color: white;
   padding: 15px;
@@ -118,15 +123,27 @@ th,td{
   width: 25%;
 }
 .cont{
+  text-align: center;
+  margin-left: 20%;
   margin-top: 10%;
   max-width: 30%;
   padding: 15px;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgba(55, 71, 79,0.5);
+}
+label{
+  color: white;
 }
 #logo{
-  height: 20%;
+  height: 30%;
   width: auto;
+}
+#logoNav{
+  width: 6.5%;
+  height: auto;
+  position: fixed;
+  left: 0.2%;
+  top: 0;
 }
 .tableContainer{
   width: 75%;
@@ -141,7 +158,7 @@ th,td{
   top: 17%;
 }
 #signinBody{
-  background-color: #EEEEEE;
+  background-size: 100% 100%;
 }
 .searchItemsPane{
   background-color: #F5F5F5;

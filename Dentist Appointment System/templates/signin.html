@@ -15,10 +15,11 @@
   <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
 </head>
 
-<body id='signinBody'>
-  <center>
+<body id="signinBody" background='{{url_for('static',filename='styles/bg.jpg')}}'>
   <div class="cont">
-    <img src="https://s-media-cache-ak0.pinimg.com/originals/14/ac/f9/14acf900a6c3b06ffaaa00f2ba913386.jpg" alt="Logo" id="logo">
+    <center></center>
+    <img src="{{url_for('static',filename='styles/logoSignIn.png')}}" alt="Logo" id="logo">
+    </center>
     <br>
     <br>
   <form class="form-horizontal" method="post" action="/login">
@@ -41,7 +42,6 @@
 </div>
 </form>
 </div>
-</center>
 </body>
 
 </html>

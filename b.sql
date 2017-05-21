@@ -246,6 +246,30 @@ BEGIN
 UPDATE appointments SET FromTime=newFrom, ToTime=newTo, DateApp=newDate, Service=newService WHERE AppointID=appointmentID;
 END$$
 
+DELIMITER $$
+USE `mydentap`$$
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `deletePatient`(
+in patIDn int
+)
+BEGIN
+
+DELETE FROM patientsname where PatID = patIDn;
+DELETE FROM patientlist where PatientID = patIDn;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `mydentap`$$
+
+CREATE DEFINER=`Renzo`@`localhost` PROCEDURE `getToday`()
+BEGIN
+select appointID, CONCAT(TIME_FORMAT(Fromtime, '%h:%i %p'), " - TO - ", TIME_FORMAT(totime, '%h:%i %p')) AS SCHEDULE, PatientName, Contact, PatientID, Service from appointments inner join patientlist on appointments.patientID = patientlist.PatientID WHERE DateApp like CURDATE() ORDER BY FromTime asc;
+END$$
+
+DELIMITER ;
+
+
 DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;

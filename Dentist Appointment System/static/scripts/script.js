@@ -14,4 +14,13 @@ $(document).ready(function(){
             a.value = a.value.toUpperCase();
         }, 1);
     }
+    $('#messageAlert').click(function(){
+      $.ajax({
+        url: '/messageAlert',
+        type: 'GET',
+        success: function(){
+          alert('All Patients have been alerted');
+        }
+      });
+    });
 });

@@ -1,5 +1,6 @@
 import flask
 import datetime
+import requests
 from flask import Flask, render_template, request, redirect, session, url_for, json, jsonify
 from flaskext.mysql import MySQL
 
@@ -35,6 +36,37 @@ def add():
 def calendar():
     return render_template('calendar.html')
 
+@app.route('/messageAlert')
+def messageAlert():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc('getToday')
+    name = []
+    cn = []
+    startTime = []
+    data = cursor.fetchall()
+    user = 'TeraxxQ'
+    passw = 'Renzo123'
+    service = []
+    for row in data:
+        serve = str(row[4])
+        served = serve.replace(" ","%20")
+        time = str(row[1])
+        trueTime = time.replace(" ","%20")
+        name.append(row[2])
+        cn.append(row[3])
+        startTime.append(trueTime)
+        service.append(served)
+    i=0
+    while i < len(name):
+        msg = 'Good%20Day!%20This%20is%20Dental%20Care%20Plus.%20You%20have%20an%20appointment%20today%20at%20our%20clinic%20at%20' + startTime[i] + '%20for%20' + service[i] + '.%20Thank%20You.'
+        url = 'http://www.isms.com.my/isms_send.php?un=%s&pwd=%s&dstno=%d&msg=%s&type=1&sendid=DentalCarePlus'%(user,passw,cn[i],msg)
+        print(url)
+        r = requests.get(url)
+        print(r.text)
+        i += 1
+    return ('', 204)
+
 @app.route('/addProcess' , methods = ['POST'])
 def addProcess():
     Fname = request.form['FName']
@@ -63,7 +95,6 @@ def updateProcess():
     Cn = request.form['ContactNumber']
     Address = request.form['Address']
     id = request.form['id']
-    print(id)
     if Fname and Minit and Lname and Age and Cn and Address:
         conn = mysql.connect()
         cursor = conn.cursor()
@@ -105,7 +136,23 @@ def logIn():
 def addAppt():
     date = request.form['Date']
     startTime = request.form['startTime']
+    startTime = datetime.datetime.strptime(startTime,'%H:%M')
+    print(startTime)
+    one = datetime.datetime.strptime('1:00','%H:%M')
+    five = datetime.datetime.strptime('5:00','%H:%M')
+    if startTime >= one and startTime <= five:
+        startTime = ("%s:%s"%(startTime.hour,startTime.minute))
+        startTime = ("""%s%s""" % (startTime, " PM"))
+        print(startTime)
+        startTime = datetime.datetime.strptime(startTime, '%I:%M %p')
+        startTime = startTime.strftime("%H:%M %p")
     endTime = request.form['endTime']
+    endTime = datetime.datetime.strptime(endTime, '%H:%M')
+    if endTime >= one and endTime <= five:
+        endTime = ("%s:%s" % (endTime.hour, endTime.minute))
+        endTime = ("""%s%s""" % (endTime, " PM"))
+        endTime = datetime.datetime.strptime(endTime, '%I:%M %p')
+        endTime = endTime.strftime("%H:%M %p")
     service = request.form['service']
     name = request.form['Fullname']
     if date and startTime and endTime and service and name:
@@ -150,7 +197,15 @@ def updateAppt():
     id = request.form['id']
     date = request.form['Date']
     startTime = request.form['startTime']
+    if startTime > '12:00':
+        startTime = ("""%s%s""" % (startTime, " PM"))
+    startTime = datetime.strptime(startTime, '%I:%M %p')
+    startTime = startTime.strftime("%H:%M %p")
     endTime = request.form['endTime']
+    if endTime > '12:00':
+        endTime = ("""%s%s""" % (endTime, " PM"))
+        endTime = datetime.strptime(endTime, '%I:%M %p')
+        endTime = endTime.strftime("%H:%M %p")
     service = request.form['service']
     if date and startTime and endTime and service and id:
         conn = mysql.connect()
@@ -170,12 +225,10 @@ def cancelAppt():
 @app.route('/tableRenderer', methods = ['POST'])
 def tableRenderer():
     date = request.form['date']
-    print(date)
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.callproc('appointByDate',(date,))
     data = cursor.fetchall()
-    print(data)
     return render_template('calendarTemp.html',data = data)
 
 @app.route('/logout')

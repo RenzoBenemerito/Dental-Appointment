@@ -11,7 +11,6 @@ $(document).ready(function(){
      });
 
      $('#delete').click(function(event){
-       event.preventDefault();
        var name = $('#nameOf').text();
        $.ajax({
          data: {

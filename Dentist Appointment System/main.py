@@ -137,13 +137,11 @@ def addAppt():
     date = request.form['Date']
     startTime = request.form['startTime']
     startTime = datetime.datetime.strptime(startTime,'%H:%M')
-    print(startTime)
     one = datetime.datetime.strptime('1:00','%H:%M')
     five = datetime.datetime.strptime('5:00','%H:%M')
     if startTime >= one and startTime <= five:
         startTime = ("%s:%s"%(startTime.hour,startTime.minute))
         startTime = ("""%s%s""" % (startTime, " PM"))
-        print(startTime)
         startTime = datetime.datetime.strptime(startTime, '%I:%M %p')
         startTime = startTime.strftime("%H:%M %p")
     endTime = request.form['endTime']

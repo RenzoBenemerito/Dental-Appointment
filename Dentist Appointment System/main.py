@@ -197,14 +197,22 @@ def updateAppt():
     id = request.form['id']
     date = request.form['Date']
     startTime = request.form['startTime']
-    if startTime > '12:00':
+    startTime = datetime.datetime.strptime(startTime, '%H:%M')
+    print(startTime)
+    one = datetime.datetime.strptime('1:00', '%H:%M')
+    five = datetime.datetime.strptime('5:00', '%H:%M')
+    if startTime >= one and startTime <= five:
+        startTime = ("%s:%s" % (startTime.hour, startTime.minute))
         startTime = ("""%s%s""" % (startTime, " PM"))
-    startTime = datetime.strptime(startTime, '%I:%M %p')
-    startTime = startTime.strftime("%H:%M %p")
+        print(startTime)
+        startTime = datetime.datetime.strptime(startTime, '%I:%M %p')
+        startTime = startTime.strftime("%H:%M %p")
     endTime = request.form['endTime']
-    if endTime > '12:00':
+    endTime = datetime.datetime.strptime(endTime, '%H:%M')
+    if endTime >= one and endTime <= five:
+        endTime = ("%s:%s" % (endTime.hour, endTime.minute))
         endTime = ("""%s%s""" % (endTime, " PM"))
-        endTime = datetime.strptime(endTime, '%I:%M %p')
+        endTime = datetime.datetime.strptime(endTime, '%I:%M %p')
         endTime = endTime.strftime("%H:%M %p")
     service = request.form['service']
     if date and startTime and endTime and service and id:

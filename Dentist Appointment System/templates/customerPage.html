@@ -8,7 +8,7 @@
       <h2 class="todaySched">Add an Appointment</h2>
       <form  action="/addAppt" id="addAppt" method="POST">
         <span class="fieldName">Date</span>
-        <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
+        <input type="date" class="fields" name="Date" placeholder="YYYY-MM-DD" required><br><br>
         <span class="fieldName">Time</span><br><br>
         <span>Start</span>
         <div style="display:inline-block; width:15%;" class="fields">
@@ -75,27 +75,27 @@
       <form action="/updateProcess" id="updateProcess" method="POST">
         <span>Patient Name</span><br><br>
         <span>First Name</span>
-        <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <span>Middle Initial</span>
-        <input type="text" class="fields" name="Minit" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="Minit" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <span>Last Name</span>
-        <input type="text" class="fields" name="LName" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="LName" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <span>Age</span>
-        <input type="text" class="fields" name="Age">
+        <input type="number" class="fields" name="Age" required>
         <br>
         <br>
         <span>Contact Number(+63)</span>
-        <input type="text" class="fields" name="ContactNumber">
+        <input type="number" class="fields" name="ContactNumber" required>
         <br>
         <br>
         <span>Address</span>
-        <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <button type="submit" class="btn add">Update</button>
@@ -126,11 +126,11 @@
         <br>
         <form  action="/updateAppt" id="updateAppt" method="POST">
           <span class="fieldName">Date</span>
-          <input type="text" class="fields" name="Date" placeholder="YYYY-MM-DD"><br><br>
+          <input type="date" class="fields" name="Date" placeholder="YYYY-MM-DD" required><br><br>
           <span class="fieldName">Time</span><br><br>
           <span>Start</span>
           <div style="display:inline-block; width:15%;" class="fields">
-            <select class="form-control" name="startTime">
+            <select class="form-control" name="startTime" required>
               <option value="8:00">8:00</option>
               <option value="8:30">8:30</option>
               <option value="9:00">9:00</option>
@@ -151,7 +151,7 @@
           <br><br>
           <span>End</span>
           <div style="display:inline-block; width:15%;" class="fields">
-            <select class="form-control" name="endTime">
+            <select class="form-control" name="endTime" required>
               <option value="8:00">8:00</option>
               <option value="8:30">8:30</option>
               <option value="9:00">9:00</option>
@@ -172,7 +172,7 @@
           <br><br>
           <span class="fieldName">Service to Render</span>
           <div style="display:inline-block; width:15%;" class="fields">
-            <select class="form-control" name="service">
+            <select class="form-control" name="service" required>
               <option value="Choose an option">Choose an Option</option>
               <option value="Cleaning">Cleaning</option>
               <option value="Tooth Extraction">Tooth Extraction</option>

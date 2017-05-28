@@ -36,27 +36,27 @@
       <form action="/addProcess" method="post">
         <span>Patient Name</span><br><br>
         <span>First Name</span>
-        <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="FName" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <span>Middle Initial</span>
-        <input type="text" class="fields" name="Minit" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="Minit" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <span>Last Name</span>
-        <input type="text" class="fields" name="LName" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="LName" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <span>Age</span>
-        <input type="text" class="fields" name="Age">
+        <input type="number" class="fields" name="Age" required>
         <br>
         <br>
         <span>Contact Number(+63)</span>
-        <input type="text" class="fields" name="ContactNumber">
+        <input type="number" class="fields" name="ContactNumber" required>
         <br>
         <br>
         <span>Address</span>
-        <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)">
+        <input type="text" class="fields" name="Address" onkeydown="upperCaseF(this)" required>
         <br>
         <br>
         <button type="submit" class="btn add">Add</button>
